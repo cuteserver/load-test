@@ -1,4 +1,4 @@
-This is the source code used to load test Cute server (cuteserver.io)
+This is the source code used to load test Cute server (https://cuteserver.io)
 
 Cute server extends Qt's signals and slots to network apps.
 
