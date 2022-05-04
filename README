@@ -1,5 +1,7 @@
 This is the source code used to load test Cute server (cuteserver.io)
 
+Cute server extends Qt's signals and slots to network apps.
+
 Here, two libraries are built: the remote objects library loaded by
 Cute server during tests and the client test app library.
 
