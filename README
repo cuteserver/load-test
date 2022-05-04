@@ -1,0 +1,31 @@
+This is the source code used to load test Cute server (cuteserver.io)
+
+Here, two libraries are built: the remote objects library loaded by
+Cute server during tests and the client test app library.
+
+The client app does not have its source available and can be downloaded
+at: https://cuteserver.io/files/LoadTest/ClientTestApp.zip.
+
+To make the client app use the new library, replace the old one located
+at the client app's libs folder.
+
+Client test app is built using Qt 6.2.
+
+Cute client and server SDKs can be downloaded at cuteserver.io
+
+If Cute Client SDK is located at /opt/Cute/SDK/Client/Qt6 and
+Cute Server SDK is located at /opt/Cute/SDK/Server/Qt6, Qt
+is installed at /opt/Qt/SDK/6.2.3/gcc_64 and this source is
+located at ~/Programming/cute-load-test, then this project can
+be built with the following commands:
+
+cmake -DCUTE_CLIENT_SDK_DIR=/opt/Cute/SDK/Client/Qt6 \
+      -DCUTE_SERVER_SDK_DIR=/opt/Cute/SDK/Server/Qt6 \
+      -DCMAKE_PREFIX_PATH=/opt/Qt/SDK/6.2.3/gcc_64 \
+      ~/Programming/cute-load-test
+
+cmake --build .
+
+Then, if the client test app is located at /opt/Cute/LoadTest/ClientTestApp,
+then libClientLoadTestAppLibrary.so under /opt/Cute/LoadTest/ClientTestApp/libs
+should be replaced with the newly built version.
