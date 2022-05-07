@@ -9,8 +9,12 @@
 #include "AsyncClientLoadAppWorker.h"
 #include <QObject>
 #include <QList>
+#include <QScopedPointer>
 #include <QSharedPointer>
 #include <QElapsedTimer>
+#include <QVector>
+#include <QWebSocketServer>
+#include <QWebSocket>
 
 namespace Cute::Tests
 {
@@ -34,10 +38,19 @@ private slots:
     void on_instantiatedRemoteObjects();
     void on_calledRemoteSlots();
     void on_workerDestroyed();
+    void on_newConnection();
+    void quitClient();
+    void on_newMessage(const QString &message);
+    void on_connectedToClient();
+
+private:
+    void setupClient();
+    void setupManager(const QStringList &arguments);
 
 private:
     QList<QSharedPointer<AsyncClientLoadAppWorker>> m_workers;
     QElapsedTimer m_elapsedTimer;
+    QStringList m_clients;
     QString m_serverAddress;
     QList<quint16> m_serverPorts;
     quint32 m_threadCount = 0;
@@ -46,6 +59,10 @@ private:
     int m_instantiatedRemoteObjectsCount = 0;
     int m_remoteSlotsCalledCount = 0;
     int m_destroyedWorkersCount = 0;
+    int m_connectedClients = 0;
+    QScopedPointer<QWebSocketServer, QScopedPointerDeleteLater> m_server;
+    QVector<QSharedPointer<QWebSocket>> m_sockets;
+
 };
 
 }
