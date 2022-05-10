@@ -298,8 +298,8 @@ void ClientLoadAppManager::setupManager(const QStringList &arguments)
         qFatal("Server address %s is not valid.", m_serverAddress.toUtf8().constData());
     if (m_serverPorts.isEmpty())
         qFatal("No ports were specified.");
-    if (m_connectionCount / m_serverPorts.size() > 64000)
-        qFatal("Failed to load test server. (connections count)/(server ports) > 64000.");
+    if ((m_connectionCount / (m_clients.size() * m_serverPorts.size())) > 64000)
+        qFatal("Failed to load test server. (connections count)/(clients count * server ports) > 64000.");
     if (0 == m_threadCount)
         qFatal("Thread count must be a positive integer.");
     for (const auto &client : m_clients)
